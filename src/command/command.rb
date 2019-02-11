@@ -1,4 +1,4 @@
-require './src/command/impl/command_contest'
+require './src/command/command_contest'
 
 class Command
 
@@ -7,7 +7,11 @@ class Command
     cls.new(options)
   end
 
-  def execute
-    raise '[ERROR] called abstract method: execute'
+  def self.validate_args(args, name, required)
+    unless required.all?{|r| args.keys.include?(r.to_sym)}
+      options = required.map{|s| "--#{s}"}.join(", ")
+      msg = "[ERROR] #{name}コマンドに必須のオプションが不足しています。必須オプションは[#{options}]です。"
+      raise Exception.new(msg)
+    end
   end
 end
