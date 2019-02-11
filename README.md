@@ -15,7 +15,7 @@ $ git clone https://github.com/mosmos21/atcoder-problems-cli.git
 - atcoder-problems.shに実行権を与え、パスを通します
 ```bash
 $ cd atcoder-problems-cli
-$ chmod +x atcoder-problems.sh
+$ chmod +x atcoder-problems
 $ echo "export PATH=\"$(pwd):\$PATH\"" >> $HOME/.bashrc
 ```
 
