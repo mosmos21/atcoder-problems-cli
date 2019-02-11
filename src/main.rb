@@ -25,6 +25,7 @@ else
     exit!
   end
 
+  # コマンドの特定とオプションの連想配列化
   command_str = ''
   options = {:type => 'text', :nums => '10'}
   until args.empty?
@@ -45,13 +46,14 @@ else
     end
   end
 
+  # 実行
   begin
     cmd = Command.get_instance(command_str, options)
     result = cmd.execute
     puts result
   rescue NameError
     puts'[ERROR] インスタンスの作成に失敗しました。'
-  rescue
-    puts '[ERROR] 実行時エラーが発生しました。'
+  rescue Exception => e
+    puts e.message
   end
 end
