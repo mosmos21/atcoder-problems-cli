@@ -1,6 +1,7 @@
 require './src/util/file_loader'
 require './src/util/at_coder_problems'
 require './src/command/command_factory'
+require './src/writer/writer_factory'
 
 COMMANDS = %w(contest problem count user submission)
 
@@ -27,7 +28,7 @@ else
 
   # コマンドの特定とオプションの連想配列化
   command_str = ''
-  options = {:type => 'text', :nums => '10'}
+  options = {:type => 'table', :nums => '10'}
   until args.empty?
     if COMMANDS.include?(args[0]) && command_str.empty?
       command_str = args.shift.capitalize
@@ -51,8 +52,9 @@ else
   puts options
   begin
     cmd = CommandFactory.get_instance(command_str, options)
+    writer = WriterFactory.get_instance(options[:type].capitalize)
     result = cmd.execute
-    puts result
+    writer.write(result)
   rescue NameError
     puts"[ERROR] #{command_str}コマンドのインスタンスの作成に失敗しました。"
   rescue Exception => e

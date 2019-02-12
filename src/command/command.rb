@@ -31,7 +31,7 @@ class Command
       raise Exception.new(msg)
     end
 
-    types = %w(text json csv)
+    types = %w(table json csv)
     if args.key?(:type) && types.none? {|v| args[:type] == v}
       msg = create_message('--type', types)
       raise Exception.new(msg)
