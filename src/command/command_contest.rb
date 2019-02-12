@@ -1,10 +1,10 @@
 require './src/command/command'
 require './src/util/at_coder_problems'
 require './src/util/record_util'
-class CommandContest
 
+class CommandContest < Command
   def initialize(options)
-    @options = options
+    super(options, 'contest')
   end
 
   def execute
@@ -13,7 +13,8 @@ class CommandContest
     return res.select{|c| c['id'] == @options[:contestid]} if @options.key?(:contestid)
 
     # ソート
-    RecordUtil::sort!(res, @options[:sort], @options.fetch(:order, 'asc')) if @options.key?(:sort)
+    RecordUtil::sort!(res, @options[:sort],
+                      @options.fetch(:order, 'asc')) if @options.key?(:sort)
 
     count = @options[:nums].to_i
     return res if count == -1
