@@ -48,7 +48,7 @@ class Command
       raise Exception.new(msg)
     end
 
-    results = %w(CE MLE TLE RE OLE IE WA AC)
+    results = %w(ce mle tle re ole ie wa ac)
     if args.key?(:result) && results.none? {|v| args[:result] == v}
       msg = create_message('--result', results)
       raise Exception.new(msg)
