@@ -48,8 +48,6 @@ else
   end
 
   # 実行
-  puts command_str
-  puts options
   begin
     cmd = CommandFactory.get_instance(command_str, options)
     writer = WriterFactory.get_instance(options[:type].capitalize)
