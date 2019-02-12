@@ -25,7 +25,7 @@ class Command
 
   private
   def validate_args(args, name, required)
-    unless required.all? {|r| args.keys.include?(r.to_sym)}
+    unless required.all? {|r| args.keys.include?(r)}
       options = required.map {|s| "--#{s}"}.join(", ")
       msg = "[ERROR] #{name}コマンドに必須のオプションが不足しています。必須オプションは[#{options}]です。"
       raise Exception.new(msg)
@@ -37,7 +37,13 @@ class Command
       raise Exception.new(msg)
     end
 
-    if args.key?(:nums) && (args[:nums] =~ /^[0-9]+$/).nil?
+    groups = %w(accept short fastest first point lang)
+    if args.key?(:group) && groups.none? {|v| args[:group] == v}
+      msg = create_message('--group', groups)
+      raise Exception.new(msg)
+    end
+
+    if args.key?(:nums) && (args[:nums] =~ /(^|^-)[0-9]+$/).nil?
       msg = '[ERROR] --numsオプションは数字のみ指定することができます。'
       raise Exception.new(msg)
     end
@@ -49,7 +55,7 @@ class Command
     end
 
     orders = %w(asc desc)
-    if args.key?(:order) && orders.none? {|v| args[:result] == v}
+    if args.key?(:order) && orders.none? {|v| args[:order] == v}
       msg = create_message('--order', orders)
       raise Exception.new(msg)
     end

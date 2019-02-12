@@ -4,7 +4,7 @@ require './src/command/command_factory'
 
 COMMANDS = %w(contest problem count user submission)
 
-OPTIONS = %w(type contestid problemid nums userid result sort order)
+OPTIONS = %w(type contestid problemid group nums userid result sort order)
 OPTIONS_FULL = OPTIONS.map {|s| "--#{s}"}
 OPTIONS_SHORT = OPTIONS.map {|s| "-#{s[0]}"}
 
@@ -47,6 +47,8 @@ else
   end
 
   # 実行
+  puts command_str
+  puts options
   begin
     cmd = CommandFactory.get_instance(command_str, options)
     result = cmd.execute
