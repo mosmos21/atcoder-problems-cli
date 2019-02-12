@@ -22,7 +22,7 @@ elsif args.include?('--version')
 else
 
   if COMMANDS.none? {|cmd| args.include?(cmd)}
-    puts '[ERROR] コマンドが指定されていません。'
+    puts '[ERROR] コマンドが指定されていません。指定可能なコマンドは--helpを参照してください。'
     exit!
   end
 
@@ -53,8 +53,9 @@ else
     writer = WriterFactory.get_instance(options[:type].capitalize)
     result = cmd.execute
     writer.write(result)
-  rescue NameError
-    puts"[ERROR] #{command_str}コマンドのインスタンスの作成に失敗しました。"
+  rescue NameError => e
+    puts "[ERROR] #{command_str}コマンドのインスタンスの作成に失敗しました。"
+    puts e
   rescue Exception => e
     puts e.message
   end
