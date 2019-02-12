@@ -1,0 +1,10 @@
+#! /bin/bash
+
+DIR=$(pwd)
+cd $(dirname ${0})
+if type "ruby" > /dev/null 2>&1; then
+    ruby src/main.rb $*
+else
+    echo "rubyコマンドが見つかりませんでした。rubyをインストールしてください。"
+fi
+cd ${DIR}
