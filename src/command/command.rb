@@ -8,6 +8,21 @@ class Command
     @options = options
   end
 
+  def execute
+    res = execute_all
+    # ソート
+    RecordUtil::sort!(res, @options[:sort],
+                      @options.fetch(:order, 'asc')) if @options.key?(:sort)
+    count = @options[:nums].to_i
+    return res if count == -1
+    # レコード数を制限して返す
+    res.slice(0, count)
+  end
+
+  def execute_all
+    raise Exception.new('[ERROR] 未実装のメソッドが呼ばれています。')
+  end
+
   private
   def validate_args(args, name, required)
     unless required.all? {|r| args.keys.include?(r.to_sym)}

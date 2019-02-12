@@ -7,18 +7,9 @@ class CommandContest < Command
     super(options, 'contest')
   end
 
-  def execute
+  def execute_all
     res = AtCoderProblems::get_contests
-    return res if res.length == 0
-    return res.select{|c| c['id'] == @options[:contestid]} if @options.key?(:contestid)
-
-    # ソート
-    RecordUtil::sort!(res, @options[:sort],
-                      @options.fetch(:order, 'asc')) if @options.key?(:sort)
-
-    count = @options[:nums].to_i
-    return res if count == -1
-    # レコード数を制限して返す
-    res.slice(0, count)
+    return res unless @options.key?(:contestid)
+    res.select{|c| c['id'] == @options[:contestid]}
   end
 end
