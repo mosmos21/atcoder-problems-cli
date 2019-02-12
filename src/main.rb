@@ -1,6 +1,6 @@
 require './src/util/file_loader'
 require './src/util/at_coder_problems'
-require './src/command/command'
+require './src/command/command_factory'
 
 COMMANDS = %w(contest problem count user submission)
 
@@ -30,7 +30,7 @@ else
   options = {:type => 'text', :nums => '10'}
   until args.empty?
     if COMMANDS.include?(args[0]) && command_str.empty?
-      command_str = args.shift
+      command_str = args.shift.capitalize
     else
       arg = args.shift
       if OPTIONS_FULL.include?(arg) || OPTIONS_SHORT.include?(arg)
@@ -48,11 +48,11 @@ else
 
   # 実行
   begin
-    cmd = Command.get_instance(command_str, options)
+    cmd = CommandFactory.get_instance(command_str, options)
     result = cmd.execute
     puts result
   rescue NameError
-    puts'[ERROR] インスタンスの作成に失敗しました。'
+    puts"[ERROR] #{command_str}コマンドのインスタンスの作成に失敗しました。"
   rescue Exception => e
     puts e.message
   end
