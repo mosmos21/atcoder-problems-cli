@@ -1,5 +1,5 @@
-require './src/command/command_contest'
-require './src/command/command_problem'
+require './src/command/impl/command_contest'
+require './src/command/impl/command_problem'
 
 class CommandFactory
   def self.get_instance(name, options)
