@@ -10,26 +10,35 @@ user       ユーザ情報を出力します。
 submission 提出情報を出力します。
 
 [オプション]
--t, --type string      出力形式を指定します。stringには以下の3種類が指定できます。
-                       text オプションを指定しなかった場合のデフォルトです。
-                       json 出力文字列がjson形式になります。
-                       csv  出力文字列がカンマ区切りのCSV形式になります。
+-t, --type string      出力形式を指定します。
+                       stringには以下の文字列が指定できます。
+                         text オプションを指定しなかった場合のデフォルトです。
+                         json 出力文字列がjson形式になります。
+                         csv  出力文字列がカンマ区切りのCSV形式になります。
 -c, --contestid string コンテストIDを指定します。
 -p, --problemid string 問題IDを指定します。
+-g, --group string     取得するランキングを指定します。countコマンド実行時にこのパラメターは必須です。
+                       stringには以下の文字列が指定できます。
+                         accept  AC数
+                         short   ショートコード
+                         fastest FAのコード
+                         first   最初のAC
+                         point   rated pointの合計
+                         lang    言語ごとのAC数
 -n, --nums string      データが複数存在する場合の出力上限を指定します。
                        デフォルトでは10が指定されています。 -1を指定すると全件出力します。
 -u, --userid string    ユーザIDを指定します。
 -r, --result string    提出結果タイプを指定します。
                        submissionコマンド以外で指定した場合は無視されます。
-                       提出結果タイプは以下の文字列が指定できます。
-                       CE  コンパイルエラー
-                       MLE メモリ制限
-                       TLE 実行時間制限
-                       RE  ランタイムエラー
-                       OLE 出力サイズ制限
-                       IE  内部エラー
-                       WA  誤答
-                       AC  正答
+                       stringには以下の文字列が指定できます。
+                         CE  コンパイルエラー
+                         MLE メモリ制限
+                         TLE 実行時間制限
+                         RE  ランタイムエラー
+                         OLE 出力サイズ制限
+                         IE  内部エラー
+                         WA  誤答
+                         AC  正答
 -s, --sort string      データが複数存在する場合の出力順を指定します
 -o, --order string     データが複数存在する場合のソートの昇降順を指定します。
                        --sortオブションが指定されていない場合、このオプションは無視されます。
