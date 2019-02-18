@@ -1,4 +1,4 @@
-require './src/writer/writer'
+require 'lib/writer/writer'
 
 class CsvWriter < Writer
   def write_result(result)

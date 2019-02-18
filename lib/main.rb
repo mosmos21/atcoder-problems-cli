@@ -1,7 +1,9 @@
-require './src/util/file_loader'
-require './src/util/at_coder_problems'
-require './src/command/command_factory'
-require './src/writer/writer_factory'
+$:.unshift "#{Dir.pwd}"
+Dir.glob("#{Dir.pwd}/lib/**/*.rb").reject {|path|
+  path.end_with?('main.rb')
+}.each do |path|
+   require path
+end
 
 COMMANDS = %w(contest problem count user submission)
 

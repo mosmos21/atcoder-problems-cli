@@ -1,7 +1,6 @@
-require './src/writer/writer'
+require 'lib/writer/writer'
 
 class TableWriter < Writer
-
   def write_result(result)
     header = result[0].keys
     write_one(header, result[0]) if result.length == 1
