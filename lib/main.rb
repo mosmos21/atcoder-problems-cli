@@ -28,7 +28,7 @@ else
   options = {:type => 'table', :nums => '10'}
   until args.empty?
     if COMMANDS.include?(args[0]) && command_str.empty?
-      command_str = args.shift.capitalize
+      command_str = args.shift
     else
       arg = args.shift
       if OPTIONS_FULL.include?(arg) || OPTIONS_SHORT.include?(arg)
@@ -45,8 +45,7 @@ else
   end
 
   begin
-    # cmd = CommandFactory.get_instance(command_str, options)
-    cmd = Command.get_instance(command_str, options)
+    cmd = Command.get_instance(command_str.capitalize, options)
     writer = Writer.get_instance(options[:type].capitalize)
     result = cmd.execute
     writer.write(result)
