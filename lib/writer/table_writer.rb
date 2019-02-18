@@ -3,8 +3,11 @@ require 'lib/writer/writer'
 class TableWriter < Writer
   def write_result(result)
     header = result[0].keys
-    write_one(header, result[0]) if result.length == 1
-    write_all(header, result)
+    if result.length == 1
+      write_one(header, result[0])
+    else
+      write_all(header, result)
+    end
   end
 
   private
@@ -24,10 +27,10 @@ class TableWriter < Writer
     nums = header.map {|column| [column.length, result.map {|r| r[column].to_s.length}.max].max}
     lines = create_line(nums)
     puts lines
-    puts "|#{header.map.with_index{|c, i| c.ljust(nums[i])}.join('|')}|"
+    puts "|#{header.map.with_index {|c, i| c.ljust(nums[i])}.join('|')}|"
     puts lines
-    result.each{|r|
-      puts "|#{header.map.with_index{|c, i| r[c].to_s.ljust(nums[i])}.join('|')}|"
+    result.each {|r|
+      puts "|#{header.map.with_index {|c, i| r[c].to_s.ljust(nums[i])}.join('|')}|"
       puts lines
     }
   end
