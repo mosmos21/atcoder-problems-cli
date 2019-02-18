@@ -1,2 +1,2 @@
-atcoder problems cli version 1.0.0, 2019-02-12
+AtCoder Problems Cli version 1.0.0, 2019-02-18
 MIT License, Copyright (c) 2019 Takahito Hashimoto
