@@ -1,6 +1,4 @@
-require './src/command/command'
-require './src/util/at_coder_problems'
-require './src/util/record_util'
+require 'lib/command/command'
 
 class CommandProblem < Command
   def initialize(options)

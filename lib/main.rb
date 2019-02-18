@@ -1,10 +1,8 @@
-require './src/util/file_loader'
-require './src/util/at_coder_problems'
-require './src/command/command_factory'
-require './src/writer/writer_factory'
+$:.unshift "#{Dir.pwd}"
+Dir.glob("#{Dir.pwd}/lib/**/*.rb").reject{|name|
+  name.end_with?('main.rb')}.each(&method(:require))
 
 COMMANDS = %w(contest problem count user submission)
-
 OPTIONS = %w(type contestid problemid group nums userid result sort order)
 OPTIONS_FULL = OPTIONS.map {|s| "--#{s}"}
 OPTIONS_SHORT = OPTIONS.map {|s| "-#{s[0]}"}
@@ -26,12 +24,11 @@ else
     exit!
   end
 
-  # コマンドの特定とオプションの連想配列化
   command_str = ''
   options = {:type => 'table', :nums => '10'}
   until args.empty?
     if COMMANDS.include?(args[0]) && command_str.empty?
-      command_str = args.shift.capitalize
+      command_str = args.shift
     else
       arg = args.shift
       if OPTIONS_FULL.include?(arg) || OPTIONS_SHORT.include?(arg)
@@ -47,10 +44,9 @@ else
     end
   end
 
-  # 実行
   begin
-    cmd = CommandFactory.get_instance(command_str, options)
-    writer = WriterFactory.get_instance(options[:type].capitalize)
+    cmd = Command.get_instance(command_str.capitalize, options)
+    writer = Writer.get_instance(options[:type].capitalize)
     result = cmd.execute
     writer.write(result)
   rescue NameError => e
