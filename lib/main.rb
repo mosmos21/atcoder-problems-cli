@@ -45,8 +45,9 @@ else
   end
 
   begin
-    cmd = CommandFactory.get_instance(command_str, options)
-    writer = WriterFactory.get_instance(options[:type].capitalize)
+    # cmd = CommandFactory.get_instance(command_str, options)
+    cmd = Command.get_instance(command_str, options)
+    writer = Writer.get_instance(options[:type].capitalize)
     result = cmd.execute
     writer.write(result)
   rescue NameError => e

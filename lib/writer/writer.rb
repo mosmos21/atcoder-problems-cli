@@ -1,4 +1,12 @@
 class Writer
+
+  class << self
+    def get_instance(type)
+      cls = eval "#{type}Writer"
+      cls.new
+    end
+  end
+
   def write(result)
     if result.length == 0
       puts '結果レコードは0件でした。'
